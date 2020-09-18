@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 const mongoDB = require("./config/mongoose");
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5500;
 
 // helmet is to enhance your API's security
 app.use(helmet());

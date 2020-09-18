@@ -74,7 +74,7 @@ const Login = (props) => {
               disabled={isLoading}
             />
           </div>
-          {isError && isError.code === 400 && (
+          {isError && isError.code === 401 && (
             <Fragment>
               <small style={{ color: "red" }}>{isError.message}</small>
             </Fragment>

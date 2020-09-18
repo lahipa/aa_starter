@@ -6,9 +6,10 @@ import Layout from "../templates";
 
 import { connect } from "react-redux";
 import { logoutUser } from "../store/actions";
+import { createLoadingSelector } from "../store/selector";
 
 function Dashboard(props) {
-  const { logoutUser, user, isLogin } = props;
+  const { logoutUser, user, isLogin, isLoading } = props;
   const history = useHistory();
 
   useEffect(() => {
@@ -36,19 +37,25 @@ function Dashboard(props) {
     <DocumentMeta {...meta}>
       <Layout>
         <div className="content">
-          Welcome {`${user.name}`}!<br />
+          {isLoading ? "Loading..." : `Welcome ${user.user?.namer}!`}
           <br />
-          <input type="button" onClick={handleLogout} value="Logout" />
+          <br />
+          <button type="button" onClick={handleLogout}>
+            {isLoading ? "Loading..." : "Logout"}
+          </button>
         </div>
       </Layout>
     </DocumentMeta>
   );
 }
 
+const loadingSelector = createLoadingSelector(["AUTH"]);
+
 const mapStateToProps = (state) => {
   return {
     user: state.usrReducer.user,
     isLogin: state.usrReducer.isLogin,
+    isLoading: loadingSelector(state),
   };
 };
 
